@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = github-test:latest
-        CONTAINER_NAME = gtest
-        DOCKER_ID_USER = joeldev
+        DOCKER_IMAGE = 'github-test:latest'
+        CONTAINER_NAME = 'gtest'
+        DOCKER_ID_USER = 'joeldev'
     }
     stages() {
         stage('Build') {

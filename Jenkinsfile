@@ -23,12 +23,12 @@ pipeline {
         }
         stage('Push image') {
             steps{
-                sh 'sudo docker push ${DOCKER_IMAGE}'
+                echo 'skipping this step in dev environment'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'sudo docker run --name ${CONTAINER_NAME} ${DOCKER_ID_USER}/${DOCKER_IMAGE}'
+                sh 'sudo docker run --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
             }
         }
     }

@@ -16,7 +16,6 @@ RUN apk --no-cache add \
         freetype-dev \
     && pip install --no-cache-dir -r requirements.txt \
     && chmod +x main.py \
-    && ln -snf /usr/share/zoneinfo/$TZ/etc/localtime && echo $TZ > /etc/timezone \
-    && mv data /
+    && ln -snf /usr/share/zoneinfo/$TZ/etc/localtime && echo $TZ > /etc/timezone
 
 CMD ["python","main.py"]

@@ -6,7 +6,7 @@ pipeline {
 
     stages() {
         stage('Preparation'){
-            
+            steps{
             echo env.BRANCH_NAME
 
             checkout(scm)
@@ -21,6 +21,7 @@ pipeline {
 
                 echo ${var1}
                 echo ${var2}
+            }
     }
 
 

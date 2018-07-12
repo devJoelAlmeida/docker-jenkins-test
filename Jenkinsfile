@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Push image') {
             steps{
-                sh 'sudo docker push ${DOCKER_ID_USER}/${DOCKER_IMAGE}'
+                sh 'sudo docker push ${DOCKER_IMAGE}'
             }
         }
         stage('Deploy') {

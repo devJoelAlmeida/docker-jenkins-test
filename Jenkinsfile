@@ -2,8 +2,6 @@ def var1 = 'VAR1'
 
 pipeline {
     agent any
-    def var2 = 'VAR2'
-
     stages() {
         stage('Preparation'){
             steps{
@@ -19,8 +17,8 @@ pipeline {
                 echo deployment_settings.image_name
                 echo deployment_settings.docker_id
 
-                echo ${var1}
-                echo ${var2}
+                echo "${var1}"
+                echo "${var2}"
             }
     }
 

@@ -5,9 +5,6 @@ pipeline {
         CONTAINER_NAME = 'gtest'
         DOCKER_ID_USER = 'joeldev'
     }
-
-    options {}
-
     stages() {
         stage('Build') {
             steps {

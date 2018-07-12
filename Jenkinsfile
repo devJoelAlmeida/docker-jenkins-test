@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'sudo docker run --rm --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
+                sh 'sudo docker run -d --rm --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
             }
         }
         stage('Clean-up'){

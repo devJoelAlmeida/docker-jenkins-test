@@ -9,10 +9,10 @@ pipeline {
 
             checkout(scm)
 
-            configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deployment_settings')]) {
-                
+            configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deploymentConfigsFile')]) {
+                deploymentConfigs = readJSON(file: deploymentConfigsFile)
             }
-            echo deployment_settings.container_name
+            echo deploymentConfigs.container_name
             //echo deployment_settings.image_name
             //echo deployment_settings.docker_id
 
@@ -23,17 +23,20 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'sudo docker build -t ${DOCKER_IMAGE} .'
+                echo '.'
+                //sh 'sudo docker build -t ${DOCKER_IMAGE} .'
             }
         }
         stage('Test') {
             steps {
-                sh 'sudo docker run -d --rm --name gtest ${DOCKER_IMAGE}'
+                echo '.'
+                //sh 'sudo docker run -d --rm --name gtest ${DOCKER_IMAGE}'
             }
         }
         stage('Clean-up'){
             steps{
-                sh 'sudo docker rm -f gtest'
+                echo '.'
+                //sh 'sudo docker rm -f gtest'
             }
         }
         stage('Push image') {
@@ -43,7 +46,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'sudo docker run -d --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
+                echo '.'
+                //sh 'sudo docker run -d --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
             }
         }
     }

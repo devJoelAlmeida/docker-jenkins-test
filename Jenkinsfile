@@ -15,12 +15,11 @@ pipeline {
             echo ':::VARS:::'
             echo '::::::::::'
             echo ':::container name:::'
-            echo deployment_settings.container_name
-            echo deployment_settings.image_name
-            echo deployment_settings.docker_id
+            //echo deployment_settings.container_name
+            //echo deployment_settings.image_name
+            //echo deployment_settings.docker_id
 
             echo "${var1}"
-            echo "${var2}"
     }
 
 

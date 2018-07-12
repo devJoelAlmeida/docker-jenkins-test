@@ -10,16 +10,17 @@ pipeline {
             checkout(scm)
 
             configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deployment_settings')]) {
-                echo ':::VARS:::'
-                echo '::::::::::'
-                echo ':::container name:::'
-                echo deployment_settings.container_name
-                echo deployment_settings.image_name
-                echo deployment_settings.docker_id
-
-                echo "${var1}"
-                echo "${var2}"
+                
             }
+            echo ':::VARS:::'
+            echo '::::::::::'
+            echo ':::container name:::'
+            echo deployment_settings.container_name
+            echo deployment_settings.image_name
+            echo deployment_settings.docker_id
+
+            echo "${var1}"
+            echo "${var2}"
     }
 
 

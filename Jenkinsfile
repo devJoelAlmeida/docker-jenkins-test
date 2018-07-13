@@ -27,9 +27,9 @@ node {
     sh("sudo docker build -t ${deploymentConfigs.image_name} .")
   }
 
-  stage('Test'){
-    echo(">>>>Under Development<<<<")
-  }
+  //stage('Test'){
+  //  echo(">>>>Under Development<<<<")
+  //}
 
   stage('Publish'){
     echo(">>>>Under Development<<<<")

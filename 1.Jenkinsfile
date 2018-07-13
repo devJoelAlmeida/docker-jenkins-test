@@ -21,7 +21,6 @@ node {
         sh("sudo docker stop ${deploymentConfigs.container_name}")
       }
     }
-
   }
   
   stage('Build') {

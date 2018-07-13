@@ -4,7 +4,6 @@ pipeline {
     agent any
     stages() {
         stage('Preparation'){
-             
             steps{
                 script{
                     checkout(scm)
@@ -23,9 +22,9 @@ pipeline {
                     //if it is running stop the container => causing it to destroy as --rm is passed in the run command
                         if (container_status == 'true'){
                             sh("sudo docker stop ${deploymentConfigs.container_name}")
+                            
                         }
                     }
-
                 }
             }
         }

@@ -1,5 +1,5 @@
 
-def deploymentConfigsFile
+def deploymentConfigs
 pipeline {
     agent any
     stages() {

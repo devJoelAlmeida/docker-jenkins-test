@@ -9,7 +9,7 @@ pipeline {
 
                 checkout(scm)
                 script{
-                    configFileProvider([configFile(fileId: 'test-config', variable: 'deploymentConfigs')]) {
+                    configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deploymentConfigs')]) {
                     }
                     echo $deploymentConfigs
                 }

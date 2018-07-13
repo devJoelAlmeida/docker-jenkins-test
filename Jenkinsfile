@@ -9,10 +9,23 @@ pipeline {
                 script{
                     checkout(scm)
                     configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deploymentConfigsFile')]) {
-                    echo("${deploymentConfigsFile}")
-                    deploymentConfigs = readJSON(file: "${deploymentConfigsFile}")
-                    
+                        
+                        deploymentConfigs = readJSON(file: "${deploymentConfigsFile}")
                     }
+                    //May not be necessary
+                    //check if the container exists
+                    container_id = sh(returnStdout: true, script:"sudo docker ps -q -f name=${deploymentConfigs.container_name}").trim()
+
+                    if(container_id){
+                    //if the container exists check if it's running
+                        container_status = sh(returnStdout: true, script:"sudo docker inspect -f '{{.State.Running}}' ${deploymentConfigs.container_name}").trim()
+
+                    //if it is running stop the container => causing it to destroy as --rm is passed in the run command
+                        if (container_status == 'true'){
+                            sh("sudo docker stop ${deploymentConfigs.container_name}")
+                        }
+                    }
+
                 }
             }
         }

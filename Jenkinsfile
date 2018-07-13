@@ -1,4 +1,4 @@
-def var1 = 'VAR1'
+
 
 pipeline {
     agent any
@@ -9,15 +9,11 @@ pipeline {
 
                 checkout(scm)
                 script{
-                    configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deploymentConfigsFile')]) {
-                    deploymentConfigs = readJSON(file: deploymentConfigsFile)
+                    configFileProvider([configFile(fileId: 'test-config', variable: 'deploymentConfigs')]) {
                     }
+                    echo deploymentConfigs
                 }
-                echo deploymentConfigs.container_name
-                //echo deployment_settings.image_name
-                //echo deployment_settings.docker_id
-
-                echo "$var1"
+                echo deploymentConfigs
             }
         }
         stage('Build') {

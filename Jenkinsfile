@@ -9,7 +9,9 @@ pipeline {
                 script{
                     checkout(scm)
                     configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deploymentConfigsFile')]) {
+                    sh('cat ${deploymentConfigsFile}')
                     deploymentConfigs = readJSON file: deploymentConfigsFile
+                    
                     }
                 }
             }

@@ -9,6 +9,7 @@ node {
     }
 
     container_status = sh(returnStdout: true, script:"sudo docker inspect -f '{{.State.Running}}' ${deploymentConfigs.container_name}").trim()
+    echo("CONTAINER STATUS ::: ${container_status}")
 
     if (container_status == 'true'){
       sh("sudo docker stop ${deploymentConfigs.container_name}")

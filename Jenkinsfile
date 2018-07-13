@@ -35,7 +35,7 @@ node {
     echo(">>>>Under Development<<<<")
     //sh('docker tag ${deploymentConfigs.image_name} ${deploymentConfigs.registry_url}/${deploymentConfigs.image_name}')
     sh("sudo docker login docker.io -u ${deploymentConfigs.docker_id} -p ${deploymentConfigs.docker_pw}")
-    sh("sudo docker push ${deploymentConfigs.image_name}")
+    sh("sudo docker push ${deploymentConfigs.docker_id}/${deploymentConfigs.image_name}")
   }
 
   stage('Deploy') {

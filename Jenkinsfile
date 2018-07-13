@@ -7,13 +7,15 @@ pipeline {
             steps{
                 echo env.BRANCH_NAME
 
-                checkout(scm)
+                
                 script{
                     configFileProvider([configFile(fileId: '7acadd24-19e4-42a9-aa36-331d10121401', variable: 'deploymentConfigs')]) {
                     }
                     echo $deploymentConfigs
                 }
                 echo $deploymentConfigs
+
+                checkout(scm)
             }
         }
         stage('Build') {

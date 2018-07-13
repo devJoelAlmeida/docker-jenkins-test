@@ -8,12 +8,16 @@ node {
       deploymentConfigs = readJSON(file: deploymentConfigsFile)
     }
 
-    container_status = sh(returnStdout: true, script:"sudo docker inspect -f '{{.State.Running}}' ${deploymentConfigs.container_name}").trim()
-    echo("CONTAINER STATUS ::: ${container_status}")
+    container_id = sh(returnStdout: true, script:"docker ps -q -f name=${deploymentConfigs.container_name}").trim()
 
-    if (container_status == 'true'){
-      sh("sudo docker stop ${deploymentConfigs.container_name}")
-    } 
+    if(container_id){
+      container_status = sh(returnStdout: true, script:"sudo docker inspect -f '{{.State.Running}}' ${deploymentConfigs.container_name}").trim()
+      echo("CONTAINER STATUS ::: ${container_status}")
+
+      if (container_status == 'true'){
+        sh("sudo docker stop ${deploymentConfigs.container_name}")
+      }
+    }
 
   }
   

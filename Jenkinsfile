@@ -8,6 +8,7 @@ node {
 
     configFileProvider([configFile(fileId: "7acadd24-19e4-42a9-aa36-331d10121401", variable: 'deploymentConfigsFile')]) {
       //deploymentConfigs = readYaml(file: deploymentConfigsFile)
+      sh("cat $deploymentConfigsFile")
     }
     sh("cat $deploymentConfigsFile")
   }

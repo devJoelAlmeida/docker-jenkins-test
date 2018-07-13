@@ -11,9 +11,9 @@ pipeline {
                 script{
                     configFileProvider([configFile(fileId: 'test-config', variable: 'deploymentConfigs')]) {
                     }
-                    echo deploymentConfigs
+                    echo $deploymentConfigs
                 }
-                echo deploymentConfigs
+                echo $deploymentConfigs
             }
         }
         stage('Build') {

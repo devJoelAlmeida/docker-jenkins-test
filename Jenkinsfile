@@ -8,16 +8,16 @@ node {
       deploymentConfigs = readJSON(file: deploymentConfigsFile)
     }
 
-    container_status = sh(returnStdout: true, script:"docker inspect -f '{{.State.Running}}' ${deploymentConfigs.container_name}").trim()
+    container_status = sh(returnStdout: true, script:"sudo docker inspect -f '{{.State.Running}}' ${deploymentConfigs.container_name}").trim()
 
     if (container_status == 'true'){
-      sh("docker stop ${deploymentConfigs.container_name}")
+      sh("sudo docker stop ${deploymentConfigs.container_name}")
     } 
 
   }
   
   stage('Build') {
-    sh("docker build -t ${deploymentConfigs.image_name} .")
+    sh("sudo docker build -t ${deploymentConfigs.image_name} .")
   }
 
   stage('Test'){
@@ -31,7 +31,7 @@ node {
   }
 
   stage('Deploy') {
-    sh("docker run -d --rm --name ${deploymentConfigs.container_name} ${deploymentConfigs.image_name}:latest")
+    sh("sudo docker run -d --rm --name ${deploymentConfigs.container_name} ${deploymentConfigs.image_name}:latest")
   }
 
  }

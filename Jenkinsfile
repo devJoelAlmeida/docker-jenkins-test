@@ -11,7 +11,7 @@ node {
   }
   
   stage('Build') {
-    echo(${deploymentConfigs.container_name})
+    echo("${deploymentConfigs.container_name}")
   }
 
   stage('Deploy') {

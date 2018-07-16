@@ -1,4 +1,4 @@
-node {
+/* node {
   def deploymentConfigs
 
   stage('Preparation') {
@@ -43,4 +43,46 @@ node {
     sh("sudo docker run -d --rm --name ${deploymentConfigs.container_name} ${deploymentConfigs.image_name}:latest")
   }
 
+} */
+
+node {
+    def app
+    def deploymentConfigs
+
+    stage('Preparation') {
+        // Clone Repository
+        checkout scm
+        // Load Config File
+        configFileProvider([configFile(fileId: "7acadd24-19e4-42a9-aa36-331d10121401", variable: 'deploymentConfigsFile')]) {
+      deploymentConfigs = readJSON(file: deploymentConfigsFile)
+    }
+
+    }
+
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+
+        app = docker.build("${deploymentConfigs.repo_name}/${deploymentConfigs.image_name}")
+    }
+
+    //stage('Test image') {
+        /* Ideally, we would run a test framework against our image.
+         * For this example, we're using a Volkswagen-type approach ;-) */
+
+    //    app.inside {
+    //        sh 'echo "Tests passed"'
+    //    }
+    //}
+
+    stage('Push image') {
+        /* Finally, we'll push the image with two tags:
+         * First, the incremental build number from Jenkins
+         * Second, the 'latest' tag.
+         * Pushing multiple tags is cheap, as all the layers are reused. */
+        echo("docker.withRegistry("${deploymentConfigs.repo_name}", 'docker-registry-credentials')") 
+        echo("app.push('${env.BUILD_NUMBER}'))")
+        echo("app.push('latest')")  
+        
+    }
 }

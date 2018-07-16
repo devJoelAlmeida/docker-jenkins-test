@@ -80,7 +80,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        echo("docker.withRegistry("${deploymentConfigs.repo_name}", 'docker-registry-credentials')") 
+        echo("docker.withRegistry('${deploymentConfigs.repo_name}', 'docker-registry-credentials')") 
         echo("app.push('${env.BUILD_NUMBER}'))")
         echo("app.push('latest')")  
         

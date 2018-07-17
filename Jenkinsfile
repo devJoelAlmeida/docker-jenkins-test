@@ -60,28 +60,24 @@ node {
     }
 
     stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
 
         app = docker.build("${deploymentConfigs.repo_name}/${deploymentConfigs.image_name}")
     }
 
-    //stage('Test image') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
-
+    /*stage('Test image') {
+        // Tests will be included inside:
+        // check versions of python and dependencies 
+        // SMTP login
+        // check for files (templates)
+        
     //    app.inside {
     //        sh 'echo "Tests passed"'
     //    }
-    //}
+    }*/
 
     stage('Push image') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
         echo("docker.withRegistry('${deploymentConfigs.registry}', 'docker-registry-credentials')") 
-        echo("app.push('${env.BUILD_NUMBER}'))")
+        echo("app.push('${env.BUILD_NUMBER}')")
         echo("app.push('latest')")  
         
     }
